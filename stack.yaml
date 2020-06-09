@@ -5,7 +5,7 @@ packages:
 
 extra-deps:
   - gi-gtk-declarative-0.6.3
-#  - gi-gtk-declarative-simple-0.6.3
+  - gi-gtk-declarative-app-simple-0.6.3
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

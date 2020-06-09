@@ -36,7 +36,7 @@ library
       base >=4.7 && <5
   default-language: Haskell2010
 
-executable hello-gi-exe
+executable hello
   main-is: Main.hs
   other-modules:
       Paths_hello_gi
@@ -46,6 +46,9 @@ executable hello-gi-exe
   build-depends:
       base >=4.7 && <5
     , hello-gi
+    , gi-gtk
+    , gi-gtk-declarative
+    , gi-gtk-declarative-app-simple
   default-language: Haskell2010
 
 test-suite hello-gi-test
