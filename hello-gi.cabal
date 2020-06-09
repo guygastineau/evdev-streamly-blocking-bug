@@ -49,6 +49,9 @@ executable hello
     , gi-gtk
     , gi-gtk-declarative
     , gi-gtk-declarative-app-simple
+    , text
+    , pipes
+    , pipes-extras
   default-language: Haskell2010
 
 test-suite hello-gi-test
