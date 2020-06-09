@@ -3,7 +3,14 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    hackage: gi-gtk-declarative-0.6.3@sha256:8db2e8a9fa20673406e4500e5040d4384eb76e362d45ffe69116575ae03ff1e3,4411
+    pantry-tree:
+      size: 2393
+      sha256: 5871aca72517a320f9ab3b7b122daa156dc18467a1b9d65fd2b2c45ec675ed09
+  original:
+    hackage: gi-gtk-declarative-0.6.3
 snapshots:
 - completed:
     size: 531237

@@ -1,17 +1,22 @@
 resolver: lts-16.0
 
 packages:
-- .
+ - .
 
 extra-deps:
-  - gi-gtk-declarative
+  - gi-gtk-declarative-0.6.3
+#  - gi-gtk-declarative-simple-0.6.3
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
 
 nix:
   enable: true
-  packages: []
+  packages:
+    [ pkgconfig
+    , gobject-introspection
+    , gnome3.gtk
+    ]
 
 # Control whether we use the GHC we find on the path
 # system-ghc: true
