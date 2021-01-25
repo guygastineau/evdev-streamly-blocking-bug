@@ -46,6 +46,7 @@ styles = mconcat
   [ ".big-text { font-size: 24px; }"
   , ".red { color: red; }"
   , ".blue { color: blue; }"
+  , "window { background-color: #333; }"
   ]
 
 main :: IO ()
