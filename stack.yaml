@@ -1,25 +1,17 @@
-resolver: lts-16.0
+resolver: nightly-2021-01-05
 
 packages:
- - .
+- .
 
 extra-deps:
-  - gi-gtk-declarative-0.6.3
-  - gi-gtk-declarative-app-simple-0.6.3
-  - text-1.2.4.0
-  - pipes-4.3.13
-  - pipes-extras-1.0.15
+- git: git@github.com:guygastineau/gi-gtk-declarative.git
+  commit: "04931ee8a4c3eaee994469d2379b50ede9cfbd56"
+  subdirs:
+  - gi-gtk-declarative
+  - gi-gtk-declarative-app-simple
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
-
-nix:
-  enable: true
-  packages:
-    [ pkgconfig
-    , gobject-introspection
-    , gnome3.gtk
-    ]
 
 # Control whether we use the GHC we find on the path
 # system-ghc: true

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 215a2fd0998bb73c2978a06030662457b73fd9af387f003f553438fd587bdeae
+-- hash: 3b00f27db141c49ccdec56230146bf95f78bd26e1c7c1e4ff7019f35d02a9416
 
 name:           hello-gi
 version:        0.1.0.0
@@ -34,9 +34,15 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , gi-gtk
+    , gi-gtk-declarative
+    , gi-gtk-declarative-app-simple
+    , pipes
+    , pipes-extras
+    , text
   default-language: Haskell2010
 
-executable hello
+executable hello-gi-exe
   main-is: Main.hs
   other-modules:
       Paths_hello_gi
@@ -45,13 +51,13 @@ executable hello
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
-    , hello-gi
     , gi-gtk
     , gi-gtk-declarative
     , gi-gtk-declarative-app-simple
-    , text
+    , hello-gi
     , pipes
     , pipes-extras
+    , text
   default-language: Haskell2010
 
 test-suite hello-gi-test
@@ -64,5 +70,11 @@ test-suite hello-gi-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , gi-gtk
+    , gi-gtk-declarative
+    , gi-gtk-declarative-app-simple
     , hello-gi
+    , pipes
+    , pipes-extras
+    , text
   default-language: Haskell2010

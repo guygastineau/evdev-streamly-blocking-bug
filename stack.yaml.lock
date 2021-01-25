@@ -5,43 +5,34 @@
 
 packages:
 - completed:
-    hackage: gi-gtk-declarative-0.6.3@sha256:8db2e8a9fa20673406e4500e5040d4384eb76e362d45ffe69116575ae03ff1e3,4411
+    subdir: gi-gtk-declarative
+    name: gi-gtk-declarative
+    version: 0.6.3
+    git: git@github.com:guygastineau/gi-gtk-declarative.git
     pantry-tree:
-      size: 2393
-      sha256: 5871aca72517a320f9ab3b7b122daa156dc18467a1b9d65fd2b2c45ec675ed09
+      size: 2574
+      sha256: 5aaeedd1a938122717dfc8708bed154c505834e5aba434c4a196f40759904c3f
+    commit: 04931ee8a4c3eaee994469d2379b50ede9cfbd56
   original:
-    hackage: gi-gtk-declarative-0.6.3
+    subdir: gi-gtk-declarative
+    git: git@github.com:guygastineau/gi-gtk-declarative.git
+    commit: 04931ee8a4c3eaee994469d2379b50ede9cfbd56
 - completed:
-    hackage: gi-gtk-declarative-app-simple-0.6.3@sha256:2b201371acd292ef8d980be02809787293f7c30e505c84910b57e307af999cc9,1818
+    subdir: gi-gtk-declarative-app-simple
+    name: gi-gtk-declarative-app-simple
+    version: 0.6.3
+    git: git@github.com:guygastineau/gi-gtk-declarative.git
     pantry-tree:
-      size: 257
-      sha256: a0d8f5953711f24c26237be319ddd4107e00291c117e038bd693faeffbb032f7
+      size: 361
+      sha256: 04309ded615c54bc9bf77276aaf9fc87ecc13ae8c1560613b5662d10911013ef
+    commit: 04931ee8a4c3eaee994469d2379b50ede9cfbd56
   original:
-    hackage: gi-gtk-declarative-app-simple-0.6.3
-- completed:
-    hackage: text-1.2.4.0@sha256:8c24450feb8e3bbb7ea3e17af24ef57e85db077c4bf53e5bcc345b283d1b1d5b,10081
-    pantry-tree:
-      size: 7457
-      sha256: 3437b0a73ce2ae1a81aa8b3438d41a85981c00894cdbee0d6d6d6873046a5d5d
-  original:
-    hackage: text-1.2.4.0
-- completed:
-    hackage: pipes-4.3.13@sha256:f7e46d86ab648da0f9cab4532a14c0dffa64532c9407b4d09250fbd70f889207,3714
-    pantry-tree:
-      size: 806
-      sha256: b08a28f1314b46211a332474e5fefddb883a7b979c0f4dd81a96fbf4ae6bcf83
-  original:
-    hackage: pipes-4.3.13
-- completed:
-    hackage: pipes-extras-1.0.15@sha256:0bd5786f17f0bfaeaa8186d770b765d6ae131ad201f89d94c4650f9443c1f9aa,1622
-    pantry-tree:
-      size: 269
-      sha256: 446894f11839302fc92271ae89e0af2d03197cdd1d8cc4923c993e84bd6920e3
-  original:
-    hackage: pipes-extras-1.0.15
+    subdir: gi-gtk-declarative-app-simple
+    git: git@github.com:guygastineau/gi-gtk-declarative.git
+    commit: 04931ee8a4c3eaee994469d2379b50ede9cfbd56
 snapshots:
 - completed:
-    size: 531237
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/16/0.yaml
-    sha256: 210e15b7043e2783115afe16b0d54914b1611cdaa73f3ca3ca7f8e0847ff54e5
-  original: lts-16.0
+    size: 562051
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/nightly/2021/1/5.yaml
+    sha256: be105362ec57d665ea17fa574ab195c49bb1f9a5bd9016174ef83cd368fba253
+  original: nightly-2021-01-05
