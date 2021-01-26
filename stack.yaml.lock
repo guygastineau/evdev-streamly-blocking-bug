@@ -51,12 +51,12 @@ packages:
     git: git@github.com:guygastineau/evdev.git
     pantry-tree:
       size: 438
-      sha256: d1c15640dd1b070142808ae9193f90f78d913b01dbc1b98893009360c6dfdb4a
-    commit: 315dcce7bfe917bdafb753701e88be4eab6e1ebe
+      sha256: 4d7ff519cb2e89b74c0b12a3e1fbd5fc4d978cd9750b8731316a1b1c3ffdd699
+    commit: d341d8eb593849ccc230105b10ab7edf790ec799
   original:
     subdir: evdev
     git: git@github.com:guygastineau/evdev.git
-    commit: 315dcce7bfe917bdafb753701e88be4eab6e1ebe
+    commit: d341d8eb593849ccc230105b10ab7edf790ec799
 snapshots:
 - completed:
     size: 562051

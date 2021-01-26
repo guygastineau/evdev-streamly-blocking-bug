@@ -12,7 +12,7 @@ extra-deps:
 - streamly-0.7.2@sha256:2dbcbd2d807b5465a281bde1a71a21f1e1e1b00be93b23083a868a07dc76de95,28286
 - primitive-0.7.0.1@sha256:a381571c36edc7dca28b77fe8159b43c14c640087ec5946adacf949feec64231,3433
 - git: git@github.com:guygastineau/evdev.git
-  commit: "315dcce7bfe917bdafb753701e88be4eab6e1ebe"
+  commit: "d341d8eb593849ccc230105b10ab7edf790ec799"
   subdirs:
   - evdev
 #- evdev-2.0.0.1@sha256:f362b4f04b110fec974219acd4e5d86775a2771cf545ec16fff21bb6b97706f0,1444

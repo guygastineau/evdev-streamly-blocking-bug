@@ -30,6 +30,7 @@ dependencies:
 - pipes
 - pipes-extras
 - bytestring
+- unix
 - evdev
 - streamly
 

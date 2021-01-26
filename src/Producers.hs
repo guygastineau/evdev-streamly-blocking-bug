@@ -8,6 +8,8 @@ module Producers
 import Evdev
 import Stream
 
+import System.Posix.IO.ByteString (defaultFileFlags, OpenFileFlags(..))
+
 import Streamly
 import qualified Streamly.Prelude as S
 
@@ -25,7 +27,7 @@ toPipes = P.unfoldr unconsS
 
 getDevice :: String -> IO Device
 getDevice name = do
-  dev <- newDevice . encodeUtf8 $ T.pack name
+  dev <- flip newDevice' (defaultFileFlags {nonBlock = True}) . encodeUtf8 $ T.pack name
   grabDevice dev
   return dev
 

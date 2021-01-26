@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5c47735e50b1bfb5078ceffb052dda5f7e6cd33f8289df8cef7a8228a387ad7c
+-- hash: c4fa07933a422ae0065d464529b95e1888f663e8339ea3afa01010115597ba5e
 
 name:           hello-gi
 version:        0.1.0.0
@@ -46,6 +46,7 @@ library
     , pipes-extras
     , streamly
     , text
+    , unix
   default-language: Haskell2010
 
 executable hello-gi-exe
@@ -69,6 +70,7 @@ executable hello-gi-exe
     , pipes-extras
     , streamly
     , text
+    , unix
   default-language: Haskell2010
 
 test-suite hello-gi-test
@@ -93,4 +95,5 @@ test-suite hello-gi-test
     , pipes-extras
     , streamly
     , text
+    , unix
   default-language: Haskell2010

@@ -31,7 +31,7 @@ readKeyEvents :: Device -> SerialT IO (Either Control Char)
 readKeyEvents = S.mapMaybe ((classifyKeyEvent' =<<) . getKeyEvent) . readEvents
 
 readEvents :: Device -> SerialT IO Event
-readEvents = S.repeatM . nextEvent
+readEvents = S.mapMaybe id . S.repeatM . nextEventMay
 
 -- A single type over the contents of EventData.KeyEvent
 data KeyEvent' = KeyEvent' Key KeyEvent
