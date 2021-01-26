@@ -30,6 +30,8 @@ dependencies:
 - pipes
 - pipes-extras
 - bytestring
+- evdev
+- streamly
 
 library:
   source-dirs: src

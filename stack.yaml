@@ -9,6 +9,7 @@ extra-deps:
   subdirs:
   - gi-gtk-declarative
   - gi-gtk-declarative-app-simple
+- evdev-2.0.0.1@sha256:f362b4f04b110fec974219acd4e5d86775a2771cf545ec16fff21bb6b97706f0,1444
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
