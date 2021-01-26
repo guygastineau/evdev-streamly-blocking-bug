@@ -23,7 +23,7 @@ import qualified GI.Gtk as Gtk
 
 data State = Initial | Greeting Text Text
 
-data Event = Greet Text Text | Closed
+data Event = Greet Text | Color Text | Closed
 
 view' :: State -> AppView Window Event
 view' s =
@@ -40,13 +40,17 @@ view' s =
                                                 ]
 
 update' :: State -> Event -> Transition State Event
-update' _ (Greet who color) = Transition (Greeting who color) (return Nothing)
-update' _ Closed      = Exit
+update' Initial            (Greet who)   = Transition (Greeting who "blue") (return Nothing)
+update' Initial            (Color color) = Transition (Greeting "no one" color) (return Nothing)
+update' (Greeting _ color) (Greet who)   = Transition (Greeting who color) (return Nothing)
+update' (Greeting who _)   (Color color) = Transition (Greeting who color) (return Nothing)
+update' _  Closed = Exit
 
 styles :: ByteString
 styles = mconcat
   [ ".big-text { font-size: 24px; }"
   , ".red { color: red; }"
+  , ".purple { color: purple; }"
   , ".blue { color: blue; }"
   , ".green { color: green; }"
   , "window { background-color: #333; }"
@@ -72,13 +76,19 @@ main = do
   Gtk.main
   where
     greetings
-      = cycle [("Joe", "blue"), ("Mike", "green")]
-      & map (uncurry Greet . first ("Hello, " <>))
+      = cycle ["Joe", "Mike"]
+      & map (Greet . ("Hello, " <>))
       & each
       & (>-> Pipes.delay 2.0)
 
+    colors
+      = cycle ["purple", "green", "blue"]
+      & map Color
+      & each
+      & (>-> Pipes.delay 1.0)
+
     app = App { view = view'
               , update = update'
-              , inputs = [greetings]
+              , inputs = [greetings, colors]
               , initialState = Initial
               }
