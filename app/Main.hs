@@ -19,9 +19,9 @@ import GI.Gtk.Declarative.App.Simple
 import qualified GI.Gdk as Gdk
 import qualified GI.Gtk as Gtk
 
-data State = Initial | Greeting Text
+data State = Initial | Greeting Text Text
 
-data Event = Greet Text | Closed
+data Event = Greet Text Text | Closed
 
 view' :: State -> AppView Window Event
 view' s =
@@ -30,15 +30,15 @@ view' s =
              , #widthRequest := 400
              , #heightRequest := 300
              ] $ case s of
-                   Initial      -> widget Label [ classes ["big-text"]
+                   Initial            -> widget Label [ classes ["big-text"]
                                                 , #label := "Nothing here yet."
                                                 ]
-                   Greeting who -> widget Label [ classes ["big-text", if who == "Hello, Joe" then "blue" else "red"]
+                   Greeting who color -> widget Label [ classes ["big-text", color]
                                                 , #label := who
                                                 ]
 
 update' :: State -> Event -> Transition State Event
-update' _ (Greet who) = Transition (Greeting who) (return Nothing)
+update' _ (Greet who color) = Transition (Greeting who color) (return Nothing)
 update' _ Closed      = Exit
 
 styles :: ByteString
@@ -46,6 +46,7 @@ styles = mconcat
   [ ".big-text { font-size: 24px; }"
   , ".red { color: red; }"
   , ".blue { color: blue; }"
+  , ".green { color: green; }"
   , "window { background-color: #333; }"
   ]
 
@@ -69,8 +70,8 @@ main = do
   Gtk.main
   where
     greetings
-      = cycle ["Joe", "Mike"]
-      & map (\n -> Greet ("Hello, " <> n))
+      = cycle [("Joe", "blue"), ("Mike", "green")]
+      & map (uncurry Greet . \(who, color) -> ("Hello, " <> who, color))
       & each
       & (>-> Pipes.delay 1.0)
 
