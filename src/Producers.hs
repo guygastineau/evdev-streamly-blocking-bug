@@ -30,7 +30,7 @@ getDevice name = do
   return dev
 
 streamDevice :: Device -> SerialT IO String
-streamDevice = linesFromDevice
+streamDevice = adapt . linesFromDevice
 
 streamDeviceWith :: (String -> a) -> Device -> SerialT IO a
 streamDeviceWith f = S.map f . streamDevice

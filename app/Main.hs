@@ -12,6 +12,7 @@ import Data.Function ((&))
 import Pipes
 import qualified Pipes.Extras as Pipes
 
+import Control.Concurrent
 import Control.Concurrent.Async (async)
 import Control.Monad (fail, void)
 import Control.Monad.IO.Class (liftIO)

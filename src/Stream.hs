@@ -12,6 +12,8 @@ import Streamly
 import qualified Streamly.Prelude as S
 import qualified Streamly.Internal.Data.Fold as FL
 
+import qualified Control.Concurrent.Async as A
+
 import Evdev
 import Evdev.Codes
 
@@ -25,13 +27,14 @@ data Control = Control ControlKey Press
   deriving Show
 
 linesFromDevice :: Device -> SerialT IO String
-linesFromDevice = lines' . trClassified . readKeyEvents
+linesFromDevice = lines' . adapt . trClassified . readKeyEvents
 
-readKeyEvents :: Device -> SerialT IO (Either Control Char)
+readKeyEvents :: Device -> AsyncT IO (Either Control Char)
 readKeyEvents = S.mapMaybe ((classifyKeyEvent' =<<) . getKeyEvent) . readEvents
 
-readEvents :: Device -> SerialT IO Event
-readEvents = S.repeatM . nextEvent
+readEvents :: Device -> AsyncT IO Event
+readEvents = asyncly . S.repeatM . nextEvent
+
 
 -- A single type over the contents of EventData.KeyEvent
 data KeyEvent' = KeyEvent' Key KeyEvent
@@ -42,12 +45,12 @@ getKeyEvent (Event (KeyEvent key event) _) = Just $ KeyEvent' key event
 getKeyEvent _ = Nothing
 
 lines' :: Monad m => SerialT m Char -> SerialT m String
-lines' = S.splitOn (== '\n') FL.toList
+lines' = S.filter (not . null) . S.splitOn (== '\n') FL.toList
 
 classifiedReduceControlInfo
-  :: Monad m => SerialT m (Either Control Char)
-  -> SerialT m (Bool, Maybe Char)
-classifiedReduceControlInfo = S.drop 1 . S.scanl' reduce (False, Nothing)
+  :: Monad m => AsyncT m (Either Control Char)
+  -> AsyncT m (Bool, Maybe Char)
+classifiedReduceControlInfo = S.scanl' reduce (False, Nothing)
   where
     reduce :: (Bool, Maybe Char) -> Either Control Char -> (Bool, Maybe Char)
     reduce (mod, _) = \case
@@ -56,7 +59,7 @@ classifiedReduceControlInfo = S.drop 1 . S.scanl' reduce (False, Nothing)
       Left (Control Shift Down) -> (True, Nothing)
       _ -> (mod, Nothing)
 
-trClassified :: Monad m => SerialT m (Either Control Char) -> SerialT m Char
+trClassified :: Monad m => AsyncT m (Either Control Char) -> AsyncT m Char
 trClassified = S.mapMaybe tr . classifiedReduceControlInfo
   where
     tr :: (Bool, Maybe Char) -> Maybe Char
