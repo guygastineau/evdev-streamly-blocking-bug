@@ -31,13 +31,6 @@ packages:
     git: git@github.com:guygastineau/gi-gtk-declarative.git
     commit: 04931ee8a4c3eaee994469d2379b50ede9cfbd56
 - completed:
-    hackage: evdev-2.0.0.1@sha256:f362b4f04b110fec974219acd4e5d86775a2771cf545ec16fff21bb6b97706f0,1444
-    pantry-tree:
-      size: 437
-      sha256: 3b08328c7061fd729664fb625bd7563761e928c75d36007dede45bae3eff572d
-  original:
-    hackage: evdev-2.0.0.1@sha256:f362b4f04b110fec974219acd4e5d86775a2771cf545ec16fff21bb6b97706f0,1444
-- completed:
     hackage: streamly-0.7.2@sha256:2dbcbd2d807b5465a281bde1a71a21f1e1e1b00be93b23083a868a07dc76de95,28286
     pantry-tree:
       size: 12739
@@ -51,6 +44,19 @@ packages:
       sha256: fea4312bd404ad504e44a7fd933a3b3442c0a5e1c41bd8abec3c2e7282d88e18
   original:
     hackage: primitive-0.7.0.1@sha256:a381571c36edc7dca28b77fe8159b43c14c640087ec5946adacf949feec64231,3433
+- completed:
+    subdir: evdev
+    name: evdev
+    version: 2.0.0.1
+    git: git@github.com:guygastineau/evdev.git
+    pantry-tree:
+      size: 438
+      sha256: d1c15640dd1b070142808ae9193f90f78d913b01dbc1b98893009360c6dfdb4a
+    commit: 315dcce7bfe917bdafb753701e88be4eab6e1ebe
+  original:
+    subdir: evdev
+    git: git@github.com:guygastineau/evdev.git
+    commit: 315dcce7bfe917bdafb753701e88be4eab6e1ebe
 snapshots:
 - completed:
     size: 562051
