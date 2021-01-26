@@ -12,6 +12,8 @@ import Control.Concurrent.Async (async)
 import Control.Monad (void)
 import Data.ByteString (ByteString)
 
+import Control.Arrow hiding (app)
+
 import GI.Gtk (Label(..), Window(..))
 import GI.Gtk.Declarative
 import GI.Gtk.Declarative.App.Simple
@@ -71,9 +73,9 @@ main = do
   where
     greetings
       = cycle [("Joe", "blue"), ("Mike", "green")]
-      & map (uncurry Greet . \(who, color) -> ("Hello, " <> who, color))
+      & map (uncurry Greet . first ("Hello, " <>))
       & each
-      & (>-> Pipes.delay 1.0)
+      & (>-> Pipes.delay 2.0)
 
     app = App { view = view'
               , update = update'
