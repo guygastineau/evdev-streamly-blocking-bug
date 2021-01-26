@@ -14,6 +14,7 @@ import qualified Pipes.Extras as Pipes
 
 import Control.Concurrent.Async (async)
 import Control.Monad (fail, void)
+import Control.Monad.IO.Class (liftIO)
 import Data.ByteString (ByteString)
 
 import GI.Gtk (Label(..), Window(..))
