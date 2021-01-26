@@ -33,4 +33,4 @@ streamDevice :: Device -> SerialT IO String
 streamDevice = linesFromDevice
 
 streamDeviceWith :: (String -> a) -> Device -> SerialT IO a
-streamDeviceWith f = S.map f . linesFromDevice
+streamDeviceWith f = S.map f . streamDevice
