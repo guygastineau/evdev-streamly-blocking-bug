@@ -2,17 +2,19 @@
 
 module Main where
 
-import Data.Text     (Text)
+import Evdev (Device)
+import Producers
+import System.Environment
+
+import Data.Text     (Text, pack)
 import Data.Function ((&))
 
 import Pipes
 import qualified Pipes.Extras as Pipes
 
 import Control.Concurrent.Async (async)
-import Control.Monad (void)
+import Control.Monad (fail, void)
 import Data.ByteString (ByteString)
-
-import Control.Arrow hiding (app)
 
 import GI.Gtk (Label(..), Window(..))
 import GI.Gtk.Declarative
@@ -21,9 +23,9 @@ import GI.Gtk.Declarative.App.Simple
 import qualified GI.Gdk as Gdk
 import qualified GI.Gtk as Gtk
 
-data State = Initial | Greeting Text Text
+data State = Initial | Display Text Text
 
-data Event = Greet Text | Color Text | Closed
+data Event = Swipe Text | Color Text | Closed
 
 view' :: State -> AppView Window Event
 view' s =
@@ -35,15 +37,15 @@ view' s =
                    Initial            -> widget Label [ classes ["big-text"]
                                                 , #label := "Nothing here yet."
                                                 ]
-                   Greeting who color -> widget Label [ classes ["big-text", color]
-                                                , #label := who
+                   Display code color -> widget Label [ classes ["big-text", color]
+                                                , #label := code
                                                 ]
 
 update' :: State -> Event -> Transition State Event
-update' Initial            (Greet who)   = Transition (Greeting who "blue") (return Nothing)
-update' Initial            (Color color) = Transition (Greeting "no one" color) (return Nothing)
-update' (Greeting _ color) (Greet who)   = Transition (Greeting who color) (return Nothing)
-update' (Greeting who _)   (Color color) = Transition (Greeting who color) (return Nothing)
+update' Initial           (Swipe code)  = Transition (Display code "blue") (return Nothing)
+update' Initial           (Color color) = Transition (Display "no one" color) (return Nothing)
+update' (Display _ color) (Swipe code)  = Transition (Display code color) (return Nothing)
+update' (Display code _)  (Color color) = Transition (Display code color) (return Nothing)
 update' _  Closed = Exit
 
 styles :: ByteString
@@ -58,6 +60,16 @@ styles = mconcat
 
 main :: IO ()
 main = do
+  args <- getArgs
+  dev <- if length args == 1 then getDevice $ head args
+         else fail "One and only one argument is required!"
+
+  let app = App { view = view'
+                , update = update'
+                , inputs = [swipes dev, colors]
+                , initialState = Initial
+                }
+
   void $ Gtk.init Nothing
 
   -- Set up screen and and CSS provider
@@ -75,20 +87,11 @@ main = do
     Gtk.mainQuit
   Gtk.main
   where
-    greetings
-      = cycle ["Joe", "Mike"]
-      & map (Greet . ("Hello, " <>))
-      & each
-      & (>-> Pipes.delay 2.0)
+    swipes :: Device -> Producer Event IO ()
+    swipes = toPipes . streamDeviceWith (Swipe . pack)
 
     colors
       = cycle ["purple", "green", "blue"]
       & map Color
       & each
-      & (>-> Pipes.delay 1.0)
-
-    app = App { view = view'
-              , update = update'
-              , inputs = [greetings, colors]
-              , initialState = Initial
-              }
+      & (>-> Pipes.delay 3.0)

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 8409b08bc8e856ed7c08831c0cc8ea38f5b49d510cb84329231599a87d8f6b5e
+-- hash: 5c47735e50b1bfb5078ceffb052dda5f7e6cd33f8289df8cef7a8228a387ad7c
 
 name:           hello-gi
 version:        0.1.0.0
@@ -27,7 +27,8 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      Producers
+      Stream
   other-modules:
       Paths_hello_gi
   hs-source-dirs:
@@ -36,12 +37,14 @@ library
       async
     , base >=4.7 && <5
     , bytestring
+    , evdev
     , gi-gdk
     , gi-gtk
     , gi-gtk-declarative
     , gi-gtk-declarative-app-simple
     , pipes
     , pipes-extras
+    , streamly
     , text
   default-language: Haskell2010
 
@@ -56,6 +59,7 @@ executable hello-gi-exe
       async
     , base >=4.7 && <5
     , bytestring
+    , evdev
     , gi-gdk
     , gi-gtk
     , gi-gtk-declarative
@@ -63,6 +67,7 @@ executable hello-gi-exe
     , hello-gi
     , pipes
     , pipes-extras
+    , streamly
     , text
   default-language: Haskell2010
 
@@ -78,6 +83,7 @@ test-suite hello-gi-test
       async
     , base >=4.7 && <5
     , bytestring
+    , evdev
     , gi-gdk
     , gi-gtk
     , gi-gtk-declarative
@@ -85,5 +91,6 @@ test-suite hello-gi-test
     , hello-gi
     , pipes
     , pipes-extras
+    , streamly
     , text
   default-language: Haskell2010
