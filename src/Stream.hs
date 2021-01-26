@@ -12,6 +12,8 @@ import Streamly
 import qualified Streamly.Prelude as S
 import qualified Streamly.Internal.Data.Fold as FL
 
+import Control.Concurrent (threadDelay)
+
 import Evdev
 import Evdev.Codes
 
@@ -31,7 +33,14 @@ readKeyEvents :: Device -> SerialT IO (Either Control Char)
 readKeyEvents = S.mapMaybe ((classifyKeyEvent' =<<) . getKeyEvent) . readEvents
 
 readEvents :: Device -> SerialT IO Event
-readEvents = S.mapMaybe id . S.repeatM . nextEventMay
+readEvents = S.mapMaybe id . S.repeatM . nextEventMay'
+
+nextEventMay' :: Device -> IO (Maybe Event)
+nextEventMay' dev = do
+  ev <- nextEventMay dev
+  case ev of
+    (Just _) -> return ev
+    Nothing -> threadDelay 10000 >> return Nothing
 
 -- A single type over the contents of EventData.KeyEvent
 data KeyEvent' = KeyEvent' Key KeyEvent
