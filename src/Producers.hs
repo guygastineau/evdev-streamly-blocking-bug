@@ -28,7 +28,8 @@ toPipes = P.unfoldr unconsS
 getDevice :: String -> IO Device
 getDevice name = do
   dev <- flip newDevice' (defaultFileFlags {nonBlock = True}) . encodeUtf8 $ T.pack name
-  grabDevice dev
+  -- Turn off device grabbing for testing with a keyboard.
+  -- grabDevice dev
   return dev
 
 streamDevice :: Device -> SerialT IO String
